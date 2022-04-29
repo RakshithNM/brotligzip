@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "serving brotli and gzip files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/RakshithNM/brotligzip.git"
+  },
+  "keywords": [
+    "brotli",
+    "gzip",
+    "compression"
+  ],
+  "author": "Rakshith Bellare",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RakshithNM/brotligzip/issues"
+  },
+  "homepage": "https://github.com/RakshithNM/brotligzip#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.0"
+  },
+  "devDependencies": {
+    "brotli": "^1.3.2"
+  }
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>BROTLI GZIP COMPRESSION</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
+    <meta name="author" content="Rakshith Bellare">
+    <meta name="description" content="Brotli Gzip Compression Comparision">
+    <meta name="keywords" content="Brotli, Gzip">
+    <link rel="stylesheet" href="https://unpkg.com/open-props"/>
+    <link rel="stylesheet" href="https://unpkg.com/open-props/normalize.min.css"/>
+
+    <meta name="theme-color" content="#011627">
+    <meta name="color-scheme" content="dark">
+    <!-- To run web application in full-screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Status Bar Style (see Supported Meta Tags below for available values) -->
+    <!-- Has no effect unless you have the previous meta tag -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="Brotli Gzip Compression Comparision">
+    <meta property="og:image" content="">
+    <meta property="og:description" content="Brotli Gzip Compression Comparision of Javascript file loading">
+    <meta property="og:site_name" content="Brotli Gzip">
+    <meta property="og:locale" content="en_US">
+    <!-- Next tags are optional but recommended -->
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@rakshithbellare">
+    <meta name="twitter:creator" content="@rakshithbellare">
+    <meta name="twitter:url" content="">
+    <meta name="twitter:title" content="Brotli Gzip Compression Comparision">
+    <meta name="twitter:description" content="Brotli Gzip Compression Comparision">
+    <meta name="twitter:image" content="">
+
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="parent">
+      <aside class="side1"></aside>
+      <main>
+        <h1>BROTLI GZIP COMPARISION</h1>
+        <fieldset>
+          <legend>Select a compression</legend>
+
+          <div class="brotli">
+            <input id="brotli" type="radio" name="compression" value="brotli">
+            <label for="brotli">BROTLI</label>
+          </div>
+          <div class="gzip">
+            <input id="gzip" type="radio" name="compression" value="gzip">
+            <label for="gzip">GZIP</label>
+          </div>
+        </fieldset>
+        <button id="fetcher">FETCH</button>
+        <h5 id="time">Time taken to load file will be shown here in milliseconds</h5>
+        <p id="fetching"></p>
+        <table id="table"></table>
+      </main>
+      <aside class="side2"></aside>
+    </div>
+    <script src="/scripts.js"></script>
+  </body>
+</html>

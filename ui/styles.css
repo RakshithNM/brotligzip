@@ -1,0 +1,113 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: var(--font-mono); 
+  color: var(--gray-0);
+  background-image: var(--gradient-20);
+  background-size: cover;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+}
+
+.parent {
+  display: grid;
+  grid-template-columns: 1fr min(80ch, calc(100% - 16px)) 1fr;
+  grid-column-gap: 8px;
+}
+
+.parent > * {
+  grid-column: 2;
+}
+
+main {
+  margin-top: var(--size-fluid-3);
+  margin-bottom: var(--size-fluid-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div:not(.parent) {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border-radius: var(--radius-4);
+  border: 2px solid var(--gray-0);
+  padding: var(--size-fluid-2);
+  transform: scale(1);
+  transition: transform 0.3s;
+}
+
+div:not(.parent):hover {
+  transform: scale(1.05);
+}
+
+div.gzip {
+  background-color: #483C68;
+}
+
+div.brotli {
+  background-color: #0B4DCC;
+}
+
+input[type='radio'] {
+  accent-color: var(--green-6);
+}
+
+button {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border-radius: var(--radius-4);
+  border: 2px solid var(--gray-0);
+  padding: var(--size-fluid-2);
+  width: var(--size-fluid-9);
+  box-shadow: var(--shadow-3);
+}
+
+table {
+  border: 2px solid var(--teal-3);
+  background-color: var(--gray-6);
+}
+
+tbody {
+  outline: 2px solid var(--green-3);
+}
+
+td {
+  outline: 2px solid var(--blue-3);
+}
+
+h4 {
+  width: max-content;
+  background-color: var(--gray-0);
+  border-radius: var(--radius-4);
+  padding: var(--size-fluid-1) var(--size-fluid-2);
+  margin-bottom: var(--size-fluid-1);
+}
+
+:where(h1, h2) {
+  text-align: center;
+}
+
+:where(h1, h2, h4, h6, p, ol > li) {
+  max-inline-size: 100%;
+}
+
+h1 {
+  color: var(--gray-9);
+  margin-bottom: var(--size-fluid-3);
+}
+
+h5 {
+  color: var(--gray-9);
+  background-color: var(--teal-2);
+  border-radius: var(--radius-4);
+  text-align: center;
+  margin: auto;
+  border: 2px solid var(--gray-9);
+  padding: var(--size-fluid-2);
+}
+
+p {
+  margin: var(--size-fluid-3);
+  color: var(--gray-4);
+}
