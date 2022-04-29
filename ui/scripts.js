@@ -1,9 +1,12 @@
 const SERVER_URL = "https://brotligzip.onrender.com";
 const fileName = "4_4MB.js";
+const timeText = "Time taken to load file will be shown here in milliseconds";
 
 const fieldset = document.querySelector('fieldset');
 const fetching = document.querySelector('#fetching');
 const time = document.querySelector('#time');
+
+time.innerText = timeText;
 
 let chosenCompression = '';
 let start_time;
@@ -14,7 +17,7 @@ fieldset.addEventListener('change', (e) => {
     fetching.innerHTML = '';
   }
   if(time.innerText) {
-    time.innerText = '';
+    time.innerText = timeText;
   }
   start_time = 0;
   fetching.innerHTML += `Click 'FETCH' button to fetch <mark>${chosenCompression}</mark> compressed file`;
