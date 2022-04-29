@@ -1,7 +1,10 @@
 const SERVER_URL = "https://brotligzip.onrender.com";
+const fileName = "4_4MB.js";
+
 const fieldset = document.querySelector('fieldset');
 const fetching = document.querySelector('#fetching');
 const time = document.querySelector('#time');
+
 let chosenCompression = '';
 let start_time;
 
@@ -73,7 +76,7 @@ fetcher.addEventListener('click', (e) => {
           if(!data.error) {
             let myScript = document.createElement("script");
             myScript.id = `${data.method}script`;
-            myScript.setAttribute("src", "http://localhost:8000/493KB.js");
+            myScript.setAttribute("src", `${SERVER_URL}/${fileName}`);
             document.body.appendChild(myScript);
             start_time = performance.now();
             myScript.addEventListener("load", scriptLoaded, false);
