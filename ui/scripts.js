@@ -13,6 +13,10 @@ fieldset.addEventListener('change', (e) => {
   if(fetching.innerHTML) {
     fetching.innerHTML = '';
   }
+  if(time.innerText) {
+    time.innerText = '';
+  }
+  start_time = 0;
   fetching.innerHTML += `Click 'FETCH' button to fetch <mark>${chosenCompression}</mark> compressed file`;
 });
 
