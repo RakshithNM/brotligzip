@@ -3,9 +3,10 @@ const app = express();
 const cors = require('cors');
 const port = 8000;
 const path = require('path');
+const CLIENT_URL = "https://brotli-gzip.netlify.app";
 
 const corsOptions = {
-  origin: 'https://brotli-gzip.netlify.app',
+  origin: CLIENT_URL,
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 

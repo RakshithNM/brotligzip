@@ -1,7 +1,8 @@
-let chosenCompression = '';
+const SERVER_URL = "https://brotligzip.onrender.com";
 const fieldset = document.querySelector('fieldset');
 const fetching = document.querySelector('#fetching');
 const time = document.querySelector('#time');
+let chosenCompression = '';
 let start_time;
 
 fieldset.addEventListener('change', (e) => {
@@ -52,7 +53,7 @@ fetcher.addEventListener('click', (e) => {
     document.body.removeChild(gzipscript);
   }
   if(e.target.tagName === 'BUTTON') {
-    const fetchURL = 'http://localhost:8000/compressed';
+    const fetchURL = `${SERVER_URL}/compressed`;
     const fetchData = {
       method: chosenCompression
     };
