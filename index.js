@@ -3,7 +3,11 @@ const app = express();
 const cors = require('cors');
 const port = 8000;
 const path = require('path');
+const {
+  readdir,
+} = require("fs");
 const CLIENT_URL = "https://brotli-gzip.netlify.app";
+//const CLIENT_URL = "http://localhost:3000";
 
 const corsOptions = {
   origin: CLIENT_URL,
@@ -33,7 +37,7 @@ app.get('*.js', (req, res, next) => {
   next();
 });
 
-app.post('/compressed', setupCompressionMethod, (req, res) => {
+app.post('/file', setupCompressionMethod, (req, res) => {
   if(req.body.method === null || req.body.method === void 0) {
     return res.status(400).send({
       error: true,
@@ -43,6 +47,22 @@ app.post('/compressed', setupCompressionMethod, (req, res) => {
   res.send({
     error: false,
     method: req.body.method
+  });
+});
+
+app.get('/fileNames', (req, res) => {
+  const directoryPath = path.join(__dirname, '/public');
+  readdir(directoryPath, (err, files) => {
+    if (err) {
+      return console.log('Unable to scan directory: ' + err);
+    }
+
+    files = files.filter((name) => name.endsWith('.js'));
+
+    res.send({
+      error: false,
+      files: files
+    });
   });
 });
 

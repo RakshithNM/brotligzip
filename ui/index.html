@@ -45,7 +45,12 @@
       <aside class="side1"></aside>
       <main>
         <h1>BROTLI GZIP COMPARISION</h1>
-        <fieldset>
+        <fieldset id="filesize">
+          <legend>Select a file size</legend>
+          <select id="filesize_select">
+          </select>
+        </fieldset>
+        <fieldset id="compression">
           <legend>Select a compression</legend>
 
           <div class="brotli">
@@ -57,9 +62,9 @@
             <label for="gzip">GZIP</label>
           </div>
         </fieldset>
+        <p id="fetching"></p>
         <button id="fetcher">FETCH</button>
         <h5 id="time"></h5>
-        <p id="fetching"></p>
         <table id="table"></table>
       </main>
       <aside class="side2"></aside>
