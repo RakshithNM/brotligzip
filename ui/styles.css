@@ -31,7 +31,7 @@ div:not(.parent) {
   margin-bottom: 20px;
   margin-top: 20px;
   border-radius: var(--radius-4);
-  border: 2px solid var(--gray-0);
+  border: 2px solid currentColor;
   padding: var(--size-fluid-2);
   transform: scale(1);
   transition: transform 0.3s;
@@ -56,7 +56,7 @@ input[type='radio'] {
 button {
   margin-bottom: 20px;
   border-radius: var(--radius-4);
-  border: 2px solid var(--gray-0);
+  border: 2px solid currentColor;
   padding: var(--size-fluid-2);
   width: var(--size-fluid-9);
   box-shadow: var(--shadow-3);
@@ -64,7 +64,7 @@ button {
 
 .animate {
   animation: var(--animation-shake-x);
-  animation-duration: 3s;
+  animation-duration: 2s;
 }
 
 select, option {
@@ -99,7 +99,7 @@ h5 {
   border-radius: var(--radius-4);
   text-align: center;
   margin: auto;
-  border: 2px solid var(--gray-9);
+  border: 2px solid currentColor;
   padding: var(--size-fluid-2);
 }
 
@@ -109,9 +109,11 @@ p {
   color: var(--gray-4);
 }
 
+button[disabled="true"],
 #compression[disabled="true"],
 #compression[disabled="true"] > div.gzip,
 #compression[disabled="true"] > div.brotli {
+  color: var(--gray-5);
   background-color: var(--gray-7);
   cursor: not-allowed;
 }
@@ -129,19 +131,29 @@ p {
   tr:nth-of-type(even) {
     background-color: var(--green-6);
     border-radius: var(--radius-blob-3);
+    padding: var(--size-fluid-6);
   }
 
   tr:nth-of-type(odd) {
     background-color: var(--grape-6);
     border-radius: var(--radius-blob-5);
+    padding: var(--size-fluid-6);
   }
 
-  td {
-    border: none;
-    border-bottom: 1px solid #eee;
+  tr:nth-of-type(even) > td {
+    border: 1px solid #eee;
     position: relative;
     padding: var(--size-fluid-1);
-    border-radius: var(--radius-blob-3);
+    border-radius: var(--radius-round);
+    background-color: var(--gray-9);
+  }
+
+  tr:nth-of-type(odd) > td {
+    border: 1px solid #eee;
+    position: relative;
+    padding: var(--size-fluid-1);
+    border-radius: var(--radius-round);
+    background-color: var(--gray-7);
   }
 
   td:before {

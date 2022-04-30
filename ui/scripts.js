@@ -34,12 +34,16 @@ const showUIStatus = () => {
   if(chosenCompression) {
     chosenFileCompressionText = `You have chosen <mark>${chosenCompression}</mark> compression method<br />`;
   }
-  let pressButtonText = "";
+  let statusText = "";
   if(chosenFile !== "" && chosenCompression !== "") {
-    pressButtonText = `Press 'FETCH' to fetch the file with the compression`;
+    statusText = `Press 'FETCH' to fetch the file with the compression`;
     fetcher.classList.add('animate');
+    fetcher.removeAttribute('disabled');
   }
-  fetching.innerHTML = `${chosenFileText}<br />${chosenFileCompressionText}${pressButtonText}`;
+  else if(chosenCompression === "") {
+    statusText = `Choose <mark>compression</mark> to start fetching the file`;
+  }
+  fetching.innerHTML = `${chosenFileText}<br />${chosenFileCompressionText}${statusText}`;
 }
 
 compression.addEventListener('change', (e) => {
@@ -88,6 +92,11 @@ const scriptLoaded = () => {
     time.innerText = '';
   }
   time.innerText = `${end_time - start_time}ms`;
+
+  filesizeSelect.removeAttribute('disabled');
+  compression.removeAttribute('disabled');
+  fetcher.removeAttribute('disabled');
+
   displayData();
 }
 
@@ -141,6 +150,9 @@ const fetchCompressedFile = () => {
 
 fetcher.addEventListener('click', (e) => {
   fetcher.classList.remove('animate');
+  filesizeSelect.setAttribute('disabled', true);
+  compression.setAttribute('disabled', true);
+
   if(!chosenCompression || chosenCompression === '') {
     console.log("no compression method chosen");
     return;
@@ -175,6 +187,7 @@ const displayFileNames = (inFileNames) => {
 
   filesizeSelect.classList.add('animate');
   compression.setAttribute('disabled', true);
+  fetcher.setAttribute('disabled', true);
 }
 
 const fetchFileNames = () => {
