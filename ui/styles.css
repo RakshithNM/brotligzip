@@ -77,12 +77,19 @@ button {
 }
 
 mark.button-look {
-  background-color: var(--green-7);
+  background-color: var(--gray-8);
+  color: var(--gray-0);
+  border: 2px solid var(--gray-0);
+  padding: var(--size-fluid-1);
+  border-radius: var(--radius-round);
 }
 
 mark.time {
   background-color: var(--indigo-7);
   color: var(--gray-0);
+  font-size: 24px;
+  border-radius: var(--radius-round);
+  padding: var(--size-fluid-1);
 }
 
 .animate {
@@ -134,16 +141,29 @@ h1 {
   margin: auto;
   border: 2px solid currentColor;
   padding: var(--size-fluid-2);
+  width: 100%;
 }
 
-p {
+#fetching {
   text-align: center;
-  padding: var(--size-fluid-3);
-  margin-top: 20px;
-  color: var(--gray-8);
   background-color: var(--grape-7);
   border-radius: var(--radius-4);
   transition: all 0.3s;
+  width: 100%;
+  margin-top: 0;
+}
+
+#fetching > p {
+  background-color: var(--lime-8);
+  color: var(--gray-0);
+  border-radius: var(--radius-4);
+  padding: var(--size-fluid-1);
+  font-size: 14px;
+  margin: 3px;
+}
+
+#fetching > p.red {
+  background-color: var(--red-9);
 }
 
 #compression {

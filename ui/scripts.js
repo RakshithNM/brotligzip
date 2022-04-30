@@ -56,23 +56,36 @@ const showUIStatus = () => {
     brotliLabel.innerHTML += brotliLabelText;
     gzipLabel.innerHTML += gzipLabelText;
   }
-  const chosenFileText = `You have chosen <mark>${chosenFile}</mark> file`;
-  let chosenFileCompressionText = "";
-  if(chosenCompression) {
-    chosenFileCompressionText = `You have chosen <mark>${chosenCompression}</mark> compression method<br />`;
-  }
+  const chosenFileText = `FILE: <mark>${chosenFile.toUpperCase()}</mark>`;
+  const chosenFileCompressionText = `${chosenCompression ? `COMPRESSION: <mark>${chosenCompression.toUpperCase()}</mark>` : ''}`;
   let statusText = "";
   if(chosenFile !== "" && chosenCompression !== "") {
-    statusText = `Press <mark class="button-look">FETCH</mark> to fetch the file with the compression`;
+    statusText = `CLICK <mark class="button-look">FETCH</mark>`;
     fetcher.classList.add('animate');
     fetcher.removeAttribute('disabled');
   }
   else if(chosenCompression === "") {
-    statusText = `Choose <mark>compression</mark> to start fetching the file`;
+    statusText = `Select a <mark>compression</mark>`;
   }
   fetching.classList.remove('hide');
   time.classList.add('hide');
-  fetching.innerHTML = `${chosenFileText}<br />${chosenFileCompressionText}${statusText}`;
+
+  const chosenFileCompressionTextHTML = document.createElement('p');
+  chosenFileCompressionTextHTML.innerHTML = `${chosenFileCompressionText}`;
+  if(chosenCompression === '') {
+    chosenFileCompressionTextHTML.classList.add('hide');
+  }
+
+  const statusTextHTML = document.createElement('p');
+  statusTextHTML.innerHTML = `${statusText}`;
+  console.log(chosenCompression, "chosenCompression");
+  if(chosenCompression === '') {
+    statusTextHTML.classList.add('red');
+  }
+
+  fetching.innerHTML += `<p>${chosenFileText}</p>`;
+  fetching.append(chosenFileCompressionTextHTML);
+  fetching.append(statusTextHTML);
 }
 
 const clearUIStatus = () => {
@@ -103,7 +116,7 @@ filesize.addEventListener('change', (e) => {
     time.classList.add('hide');
     fetching.classList.add('hide');
 
-    chosenCompression = null;
+    chosenCompression = '';
     let ele = document.getElementsByName("compression");
     for(let i = 0; i < ele.length; i++) {
        ele[i].checked = false;
@@ -148,7 +161,7 @@ const scriptLoaded = () => {
   }
   fetching.classList.add('hide');
   time.classList.remove('hide');
-  time.innerHTML = `It took <mark class="time">${end_time - start_time}ms</mark> to fetch the file`;
+  time.innerHTML = `<mark class="time">${end_time - start_time}ms</mark><br /><strong><small>TIME TAKEN TO FETCH THE FILE</small></strong>`;
 
   filesize.removeAttribute('disabled');
   compression.removeAttribute('disabled');
