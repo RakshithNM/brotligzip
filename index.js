@@ -5,7 +5,9 @@ const port = 8000;
 const path = require('path');
 const {
   readdir,
+  statSync
 } = require("fs");
+const hr = require('@tsmx/human-readable');
 const CLIENT_URL = "https://brotli-gzip.netlify.app";
 //const CLIENT_URL = "http://localhost:3000";
 
@@ -57,11 +59,21 @@ app.get('/fileNames', (req, res) => {
       return console.log('Unable to scan directory: ' + err);
     }
 
-    files = files.filter((name) => name.endsWith('.js'));
+    const uncompressedFiles = files.filter((name) => name.endsWith('.js'));
+    const compressedFiles = files.filter((name) => !name.endsWith('.js'));
+    const filesInfo = compressedFiles.map((cFile) => {
+      const key = uncompressedFiles.filter((uFile) => uFile.startsWith(cFile.split('.js')[0]))[0];
+      return {
+        [key]: {
+          name: cFile,
+          size: hr.fromBytes(statSync(`${directoryPath}/${cFile}`).size)
+        }
+      }
+    });
 
     res.send({
       error: false,
-      files: files
+      files: filesInfo
     });
   });
 });

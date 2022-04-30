@@ -93,7 +93,7 @@ h1 {
   margin-bottom: var(--size-fluid-3);
 }
 
-h5 {
+#time {
   color: var(--gray-9);
   background-color: var(--teal-2);
   border-radius: var(--radius-4);
@@ -110,6 +110,7 @@ p {
 }
 
 button[disabled="true"],
+#filesize[disabled="true"],
 #compression[disabled="true"],
 #compression[disabled="true"] > div.gzip,
 #compression[disabled="true"] > div.brotli {
@@ -121,6 +122,12 @@ button[disabled="true"],
 @media only screen and (max-width: 1500px) {
   table, thead, tbody, th, td, tr {
     display: block;
+    border-radius: var(--radius-4);
+    background: var(--blue-2);
+  }
+
+  table {
+    margin-top: 20px;
   }
 
   tr { 
@@ -131,13 +138,11 @@ button[disabled="true"],
   tr:nth-of-type(even) {
     background-color: var(--green-6);
     border-radius: var(--radius-blob-3);
-    padding: var(--size-fluid-6);
   }
 
   tr:nth-of-type(odd) {
     background-color: var(--grape-6);
     border-radius: var(--radius-blob-5);
-    padding: var(--size-fluid-6);
   }
 
   tr:nth-of-type(even) > td {
@@ -156,6 +161,16 @@ button[disabled="true"],
     background-color: var(--gray-7);
   }
 
+  tr:first-child,
+  tr:first-child > td:first-child {
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    text-align: center;
+    font-size: 27px;
+    color: var(--gray-9);
+  }
+
   td:before {
     position: absolute;
     top: 12px;
@@ -164,5 +179,17 @@ button[disabled="true"],
     padding-right: 40px;
     white-space: nowrap;
     margin-left: -150px;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  select {
+    background: var(--gray-0);
+    color: var(--gray-9);
+  }
+
+  #fetcher {
+    background: var(--gray-9);
+    color: var(--gray-0);
   }
 }

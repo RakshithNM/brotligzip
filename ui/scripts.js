@@ -1,6 +1,8 @@
 const SERVER_URL = "https://brotligzip.onrender.com";
 //const SERVER_URL = "http://localhost:8000";
 const timeText = "Time taken to load file will be shown here in milliseconds";
+let brotliLabelInitial = "BROTLI";
+let gzipLabelInitial = "GZIP";
 
 const filesize = document.querySelector('#filesize');
 const compression = document.querySelector('#compression');
@@ -9,8 +11,14 @@ const time = document.querySelector('#time');
 const table = document.getElementById('table');
 const filesizeSelect = document.getElementById('filesize_select');
 
-time.innerText = timeText;
+const brotliLabel = document.querySelector('#brotli-label');
+const gzipLabel = document.querySelector('#gzip-label');
 
+time.innerText = timeText;
+brotliLabel.innerText = brotliLabelInitial;
+gzipLabel.innerText = gzipLabelInitial;
+
+let filesInfo = [];
 let chosenFile = '';
 let chosenCompression = '';
 let start_time;
@@ -29,6 +37,28 @@ const showUIStatus = () => {
   if(fetching.innerHTML) {
     fetching.innerHTML = '';
   }
+  const currentFileInfo = filesInfo.filter((info) => info[chosenFile])
+  const brotliFileInfoForCurrentFile = currentFileInfo.filter((info) => info[chosenFile].name.endsWith('.br'));
+  const gzipFileInfoForCurrentFile = currentFileInfo.filter((info) => info[chosenFile].name.endsWith('.gz'));
+
+  if(brotliFileInfoForCurrentFile.length > 0) {
+    if(brotliLabel.innerHTML) {
+      brotliLabel.innerHTML = '';
+    }
+    const size =  brotliFileInfoForCurrentFile[0][chosenFile].size;
+    brotliLabelText = `${brotliLabelInitial} <small>${size}</small>`;
+  }
+  if(gzipFileInfoForCurrentFile.length > 0) {
+    if(gzipLabel.innerHTML) {
+      gzipLabel.innerHTML = '';
+    }
+    const size =  gzipFileInfoForCurrentFile[0][chosenFile].size;
+    gzipLabelText = `${gzipLabelInitial} <small>${size}</small>`;
+  }
+  if(chosenFile !== "") {
+    brotliLabel.innerHTML += brotliLabelText;
+    gzipLabel.innerHTML += gzipLabelText;
+  }
   const chosenFileText = `You have chosen <mark>${chosenFile}</mark> file`;
   let chosenFileCompressionText = "";
   if(chosenCompression) {
@@ -46,6 +76,12 @@ const showUIStatus = () => {
   fetching.innerHTML = `${chosenFileText}<br />${chosenFileCompressionText}${statusText}`;
 }
 
+const clearUIStatus = () => {
+  if(fetching.innerHTML) {
+    fetching.innerHTML = "";
+  }
+}
+
 compression.addEventListener('change', (e) => {
   chosenCompression = e.target.value ? e.target.value : 'brotli';
   showUIStatus();
@@ -61,6 +97,7 @@ filesize.addEventListener('change', (e) => {
   if(chosenFile === null) {
     return;
   }
+
   showUIStatus();
 
   reset();
@@ -75,6 +112,10 @@ filesize.addEventListener('change', (e) => {
 
 const displayData = () => {
   if(window.data) {
+    const headerRow = table.insertRow();
+    const headerCell = headerRow.insertCell();
+    headerCell.innerText = `DATA FROM LOADED FILE`;
+
     for(var user of window.data) {
       const tr = table.insertRow();
       const keys = Object.keys(user);
@@ -91,12 +132,13 @@ const scriptLoaded = () => {
   if(time.innerText) {
     time.innerText = '';
   }
-  time.innerText = `${end_time - start_time}ms`;
+  time.innerHTML = `<strong>${end_time - start_time}ms</strong>`;
 
-  filesizeSelect.removeAttribute('disabled');
+  filesize.removeAttribute('disabled');
   compression.removeAttribute('disabled');
   fetcher.removeAttribute('disabled');
 
+  clearUIStatus();
   displayData();
 }
 
@@ -150,8 +192,6 @@ const fetchCompressedFile = () => {
 
 fetcher.addEventListener('click', (e) => {
   fetcher.classList.remove('animate');
-  filesizeSelect.setAttribute('disabled', true);
-  compression.setAttribute('disabled', true);
 
   if(!chosenCompression || chosenCompression === '') {
     console.log("no compression method chosen");
@@ -161,6 +201,10 @@ fetcher.addEventListener('click', (e) => {
     console.log("no file chosen");
     return;
   }
+
+  filesize.setAttribute('disabled', true);
+  compression.setAttribute('disabled', true);
+
   if(start_time > 0) {
     start_time = 0;
   }
@@ -172,16 +216,18 @@ fetcher.addEventListener('click', (e) => {
   }
 });
 
-const displayFileNames = (inFileNames) => {
+const displayFileNames = (inFileInfo) => {
+  filesInfo = inFileInfo;
+  const filesToSelectFrom = [...new Set(inFileInfo.map((info) => Object.keys(info).join('')))];
   let firstOption = document.createElement('option');
   firstOption.value = null;
   firstOption.text = "Select a file"
   filesizeSelect.add(firstOption, null);
 
-  for(var name of inFileNames) {
+  for(var file of filesToSelectFrom) {
     let option = document.createElement('option');
-    option.value = name;
-    option.text = name;
+    option.value = file;
+    option.text = file;
     filesizeSelect.add(option, null);
   }
 
