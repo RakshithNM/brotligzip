@@ -168,6 +168,7 @@ h1 {
 
 #compression {
   margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 button[disabled="true"],
@@ -178,10 +179,6 @@ button[disabled="true"],
   color: var(--gray-5);
   background-color: var(--gray-7);
   cursor: not-allowed;
-}
-
-button {
-  margin-top: 20px;
 }
 
 @media only screen and (max-width: 1500px) {
