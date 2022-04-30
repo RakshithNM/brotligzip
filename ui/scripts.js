@@ -1,6 +1,5 @@
 const SERVER_URL = "https://brotligzip.onrender.com";
 //const SERVER_URL = "http://localhost:8000";
-const timeText = "Time taken to load file will be shown here in milliseconds";
 let brotliLabelInitial = "BROTLI";
 let gzipLabelInitial = "GZIP";
 
@@ -14,7 +13,6 @@ const filesizeSelect = document.getElementById('filesize_select');
 const brotliLabel = document.querySelector('#brotli-label');
 const gzipLabel = document.querySelector('#gzip-label');
 
-time.innerText = timeText;
 brotliLabel.innerText = brotliLabelInitial;
 gzipLabel.innerText = gzipLabelInitial;
 
@@ -24,9 +22,6 @@ let chosenCompression = '';
 let start_time;
 
 const reset = () => {
-  if(time.innerText) {
-    time.innerText = timeText;
-  }
   if(table.innerText) {
     table.innerText = '';
   }
@@ -66,13 +61,15 @@ const showUIStatus = () => {
   }
   let statusText = "";
   if(chosenFile !== "" && chosenCompression !== "") {
-    statusText = `Press 'FETCH' to fetch the file with the compression`;
+    statusText = `Press <mark class="button-look">FETCH</mark> to fetch the file with the compression`;
     fetcher.classList.add('animate');
     fetcher.removeAttribute('disabled');
   }
   else if(chosenCompression === "") {
     statusText = `Choose <mark>compression</mark> to start fetching the file`;
   }
+  fetching.classList.remove('hide');
+  time.classList.add('hide');
   fetching.innerHTML = `${chosenFileText}<br />${chosenFileCompressionText}${statusText}`;
 }
 
@@ -132,7 +129,9 @@ const scriptLoaded = () => {
   if(time.innerText) {
     time.innerText = '';
   }
-  time.innerHTML = `<strong>${end_time - start_time}ms</strong>`;
+  fetching.classList.add('hide');
+  time.classList.remove('hide');
+  time.innerHTML = `It took <mark class="time">${end_time - start_time}ms</mark> to fetch the file`;
 
   filesize.removeAttribute('disabled');
   compression.removeAttribute('disabled');

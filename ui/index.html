@@ -45,26 +45,28 @@
       <aside class="side1"></aside>
       <main>
         <h1>BROTLI GZIP COMPARISION</h1>
-        <fieldset id="filesize">
-          <legend>Select a file size</legend>
-          <select id="filesize_select">
-          </select>
-        </fieldset>
-        <fieldset id="compression">
-          <legend>Select a compression</legend>
+        <section>
+          <fieldset id="filesize">
+            <legend>Select a file size</legend>
+            <select id="filesize_select">
+            </select>
+          </fieldset>
+          <fieldset id="compression">
+            <legend>Select a compression</legend>
 
-          <div class="brotli">
-            <input id="brotli" type="radio" name="compression" value="brotli">
-            <label id="brotli-label" for="brotli"></label>
-          </div>
-          <div class="gzip">
-            <input id="gzip" type="radio" name="compression" value="gzip">
-            <label id="gzip-label" for="gzip"></label>
-          </div>
-        </fieldset>
-        <p id="fetching"></p>
-        <button id="fetcher">FETCH</button>
-        <p id="time"></p>
+            <div class="brotli">
+              <input id="brotli" type="radio" name="compression" value="brotli">
+              <label id="brotli-label" for="brotli"></label>
+            </div>
+            <div class="gzip">
+              <input id="gzip" type="radio" name="compression" value="gzip">
+              <label id="gzip-label" for="gzip"></label>
+            </div>
+          </fieldset>
+          <p id="fetching" class="hide"></p>
+          <button id="fetcher">FETCH</button>
+          <p id="time" class="hide"></p>
+        </section>
         <table id="table"></table>
       </main>
       <aside class="side2"></aside>
