@@ -47,11 +47,11 @@
         <h1>BROTLI GZIP COMPARISION</h1>
         <section>
           <fieldset id="filesize">
-            <legend>Select a file size</legend>
+            <legend>Select a file to fetch</legend>
             <select id="filesize_select">
             </select>
           </fieldset>
-          <fieldset id="compression">
+          <fieldset id="compression" class="hide">
             <legend>Select a compression</legend>
 
             <div class="brotli">
@@ -64,7 +64,7 @@
             </div>
           </fieldset>
           <p id="fetching" class="hide"></p>
-          <button id="fetcher">FETCH</button>
+          <button id="fetcher" class="hide">FETCH</button>
           <p id="time" class="hide"></p>
         </section>
         <table id="table"></table>

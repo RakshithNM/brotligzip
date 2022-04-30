@@ -36,17 +36,19 @@ const showUIStatus = () => {
   const brotliFileInfoForCurrentFile = currentFileInfo.filter((info) => info[chosenFile].name.endsWith('.br'));
   const gzipFileInfoForCurrentFile = currentFileInfo.filter((info) => info[chosenFile].name.endsWith('.gz'));
 
+  if(brotliLabel.innerHTML) {
+    brotliLabel.innerHTML = '';
+  }
+
+  if(gzipLabel.innerHTML) {
+    gzipLabel.innerHTML = '';
+  }
+
   if(brotliFileInfoForCurrentFile.length > 0) {
-    if(brotliLabel.innerHTML) {
-      brotliLabel.innerHTML = '';
-    }
     const size =  brotliFileInfoForCurrentFile[0][chosenFile].size;
     brotliLabelText = `${brotliLabelInitial} <small>${size}</small>`;
   }
   if(gzipFileInfoForCurrentFile.length > 0) {
-    if(gzipLabel.innerHTML) {
-      gzipLabel.innerHTML = '';
-    }
     const size =  gzipFileInfoForCurrentFile[0][chosenFile].size;
     gzipLabelText = `${gzipLabelInitial} <small>${size}</small>`;
   }
@@ -80,10 +82,14 @@ const clearUIStatus = () => {
 }
 
 compression.addEventListener('change', (e) => {
-  chosenCompression = e.target.value ? e.target.value : 'brotli';
+  chosenCompression = e.target.value ? e.target.value : null;
+  if(chosenCompression === null) {
+    return;
+  }
   showUIStatus();
 
   compression.classList.remove('animate');
+  fetcher.classList.remove('hide');
 
   reset();
   removeIncludedScripts();
@@ -91,7 +97,17 @@ compression.addEventListener('change', (e) => {
 
 filesize.addEventListener('change', (e) => {
   chosenFile = e.target.value ? e.target.value : null;
-  if(chosenFile === null) {
+  if(chosenFile === null || chosenFile === "null") {
+    compression.classList.add('hide');
+    fetcher.classList.add('hide');
+    time.classList.add('hide');
+    fetching.classList.add('hide');
+
+    chosenCompression = null;
+    let ele = document.getElementsByName("compression");
+    for(let i = 0; i < ele.length; i++) {
+       ele[i].checked = false;
+    }
     return;
   }
 
@@ -101,6 +117,7 @@ filesize.addEventListener('change', (e) => {
   removeIncludedScripts();
 
   filesizeSelect.classList.remove('animate');
+  compression.classList.remove('hide');
   compression.removeAttribute('disabled');
   if(chosenCompression === "") {
     compression.classList.add('animate');
